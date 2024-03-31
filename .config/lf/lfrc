@@ -1,0 +1,3 @@
+map . set hidden!  
+set ratios '1:2:6'   
+set previewer ~/.config/lf/pv.sh  

@@ -1,0 +1,5 @@
+
+resize_window wider 5
+launch  --type=window  --spacing margin=20  --location=hsplit lf
+launch  --type=window  --spacing margin=20  --location=hsplit lf
+resize_window taller 2
