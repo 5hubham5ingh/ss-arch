@@ -1,5 +1,6 @@
-
-launch  --type=window  --location=hsplit btop -p 2
+launch  --type=window cd /
+launch  --type=window  --location=vsplit btop -p 2
+resize_window narrower 20
 launch  --type=window  --location=hsplit btop -p 1
 resize_window shorter 4
 
