@@ -1,4 +1,5 @@
-launch  --type=window cd /
+launch  /home/ss/.scripts/weatherAndSysInfo.sh
+
 launch  --type=window  --location=vsplit btop -p 2
 resize_window narrower 20
 launch  --type=window  --location=hsplit btop -p 1
