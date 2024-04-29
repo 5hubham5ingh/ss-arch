@@ -16,6 +16,6 @@ case "$1" in
 } ;;
     *.jpeg) kitty +kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$1" < /dev/null > /dev/tty
 } ;;
-    *)  unset COLORTERM; bat --wrap=auto --color=always --style=full "$1";;
+    *)  unset COLORTERM; bat --wrap=auto --color=always --style=full --terminal-width "$((w-5))" "$1";;
 esac
 
