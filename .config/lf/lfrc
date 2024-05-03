@@ -4,8 +4,8 @@ set preview true
 
 map . set hidden!
 set ratios '1:2:5'
-set cleaner ~/.config/lf/kitty-cleaner.sh
-set previewer ~/.config/lf/pv.sh
+set cleaner ~/.config/lf/lf_kitty_clean
+set previewer ~/.config/lf/lf_kitty_preview
 
 set shellopts '-eu'
 
