@@ -23,8 +23,10 @@ map "'"
 map '"'
 map d
 map c
-map e
+map e edit
 map f
+
+cmd edit $nvim $f
 
 cmd fzf_jump ${{
   res="$(find . -maxdepth 5 | fzf --reverse --header='Jump to location')"
@@ -44,13 +46,14 @@ cmd open &{{
     case $(file --mime-type -Lb $f) in
         text/*) lf -remote "send $id \$nvim \$fx";;
         application/json) lf -remote "send $id \$nvim \$fx";;
-        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+        application/gzip) tar -xzvf $f;;
+        *) for f in $fx; do $nvim $f > /dev/null 2> /dev/null & done;;
     esac
 }}
 
 # mkdir command. See wiki if you want it to select created dir
 map a :push %mkdir<space>
-
+map t :push %touch<space>
 # define a custom 'rename' command without prompt for overwrite
 cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
 map r push :rename<space>
