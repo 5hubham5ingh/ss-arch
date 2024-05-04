@@ -1,5 +1,4 @@
 set shell sh
-set preview true
 
 
 map . set hidden!
@@ -7,15 +6,7 @@ set ratios '1:2:5'
 set cleaner ~/.config/lf/lf_kitty_clean
 set previewer ~/.config/lf/lf_kitty_preview
 
-set shellopts '-eu'
-
-set ifs "\n"
-set scrolloff 10
-
-# use s for shell commands
-
 set wrapscroll true
-
 
 map m
 map o
