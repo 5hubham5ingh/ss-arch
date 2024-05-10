@@ -3,7 +3,7 @@
 import createTable from "./llrtHelpers/createTable.llrt.js";
 import exec from "./llrtHelpers/exec.llrt.js";
 import delLine from "./llrtHelpers/delLine.llrt.js";
-
+import weather from "./weather.llrt.js"
 const sysInfo = async () => {
 
   const brightness = await exec('cat', ['/sys/class/backlight/intel_backlight/brightness']);
@@ -12,7 +12,8 @@ const sysInfo = async () => {
 
   const soundInfo = (await exec('pactl', ['list', 'sinks'])).split('\n');
   const currentVolume = soundInfo[9].match(/\d+%/)[0];
-  const activeDevice = soundInfo[85].match(/speaker/)[0] ? 'speaker' : 'headphones';
+  const activeDeviceInfo =  soundInfo[89] || soundInfo[85];
+  const activeDevice = activeDeviceInfo.match(/speaker/) ? 'speaker' : 'headphones';
 
   const batteryInfo = (await exec('upower', ['-i', '/org/freedesktop/UPower/devices/battery_BAT1'])).split('\n');
   const state = batteryInfo[10].split(/\s+/)[2] === 'charging' ?  batteryInfo[19].split(':')[1].trim() : 'charging' 
@@ -33,17 +34,17 @@ const sysInfo = async () => {
 }
 
 
-const updateSysInfo = () => {
-  //delLine(8);
-  sysInfo()
+const updateSysInfo = async () => {
+  delLine(8);
+ await sysInfo()
 }
 
-// //    stand alone
+ //    stand alone
 //   weather().then(() => {
-  //   sysInfo()
-  //   setInterval(updateSysInfo, 60 * 1000);
-  // })
+   //  sysInfo()
+ //    setInterval(updateSysInfo,  1000);
+//   })
 
 // with bash
 sysInfo()
-setInterval(updateSysInfo,60 * 1000);
+setInterval(updateSysInfo, 60 * 1000);

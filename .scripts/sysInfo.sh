@@ -40,7 +40,7 @@ while true; do
     # Print the table footer
     printf "%-25s\n" " |-----------------------------------|----------------------------------|------------------------|------------------------|"
 
-    sleep 300
+    sleep 1
 
     # Move the cursor up 5 lines
     printf "\033[6A"
