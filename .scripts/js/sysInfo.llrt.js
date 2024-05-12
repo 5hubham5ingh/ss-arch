@@ -16,7 +16,7 @@ const sysInfo = async () => {
   const activeDevice = activeDeviceInfo.match(/speaker/) ? 'speaker' : 'headphones';
 
   const batteryInfo = (await exec('upower', ['-i', '/org/freedesktop/UPower/devices/battery_BAT1'])).split('\n');
-  const state = batteryInfo[10].split(/\s+/)[2] === 'charging' ?  batteryInfo[19].split(':')[1].trim() : 'charging' 
+  const state = batteryInfo[10].split(/\s+/)[2] === 'charging' ?  `- ${batteryInfo[19].split(':')[1].trim()}` : `+ ${batteryInfo[19].split(':')[1].trim()}`
   const powerInPercentage = state !== 'full' ? batteryInfo[20].split(/\s+/)[2] : batteryInfo[19].split(/\s+/)[2];
 
   const wifiNetwork = (await exec('iwconfig', ['wlan0'])).split('\n')[0].match(/ESSID:"(\w+)"/)[1];
