@@ -12,6 +12,7 @@ export default function exec(command, args) {
     });
 
     childProcess.stderr.on('data', (data) => {
+      console.log(data.toString())
       reject(data.toString());
     });
 
