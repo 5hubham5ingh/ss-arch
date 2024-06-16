@@ -12,11 +12,11 @@ const sysInfo = async () => {
 
   const soundInfo = (await exec('pactl', ['list', 'sinks'])).split('\n');
   const currentVolume = soundInfo[9].match(/\d+%/)[0];
-  const activeDeviceInfo =  soundInfo[89] || soundInfo[85];
+  const activeDeviceInfo = soundInfo[89] || soundInfo[85];
   const activeDevice = activeDeviceInfo.match(/speaker/) ? 'speaker' : 'headphones';
 
   const batteryInfo = (await exec('upower', ['-i', '/org/freedesktop/UPower/devices/battery_BAT1'])).split('\n');
-  const state = batteryInfo[10].split(/\s+/)[2] === 'charging' ?  `- ${batteryInfo[19].split(':')[1].trim()}` : `+ ${batteryInfo[19].split(':')[1].trim()}`
+  const state = batteryInfo[10].split(/\s+/)[2] === 'charging' ? `- ${batteryInfo[19].split(':')[1].trim()}` : `+ ${batteryInfo[19].split(':')[1].trim()}`
   const powerInPercentage = state !== 'full' ? batteryInfo[20].split(/\s+/)[2] : batteryInfo[19].split(/\s+/)[2];
 
   const wifiNetwork = (await exec('iwconfig', ['wlan0'])).split('\n')[0].match(/ESSID:"(\w+)"/)[1];
@@ -36,15 +36,15 @@ const sysInfo = async () => {
 
 const updateSysInfo = async () => {
   delLine(8);
- await sysInfo()
+  await sysInfo().catch(err => 0)
 }
 
- //    stand alone
+//    stand alone
 //   weather().then(() => {
-   //  sysInfo()
- //    setInterval(updateSysInfo,  1000);
+//  sysInfo()
+//    setInterval(updateSysInfo,  1000);
 //   })
 
 // with bash
-sysInfo()
+sysInfo().catch(err => 0)
 setInterval(updateSysInfo, 60 * 1000);
