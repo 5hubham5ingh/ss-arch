@@ -1,8 +1,13 @@
 launch  /home/ss/.scripts/weatherAndSysInfo.sh
+
 launch  --type=window  --location=vsplit btop -p 2
-resize_window narrower 20
+
+resize_window narrower 23
+
 launch  --type=window  --location=hsplit btop -p 1
+
 resize_window shorter 4
+
 focus
 
 #launch  --type=window  --spacing margin=20  --location=hsplit btop -p 2
