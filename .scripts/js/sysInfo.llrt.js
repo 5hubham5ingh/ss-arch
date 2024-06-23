@@ -28,7 +28,7 @@ const sysInfo = async () => {
     [` Level:${spaceBetween}${powerInPercentage} `, ` State:${spaceBetween}${wifiState} `, ` Volume:${spaceBetween}${currentVolume} `, ` Brightness:${spaceBetween}${brightnessInPercent} `],
     [` State:${spaceBetween}${state} `, ` Network:${spaceBetween}${wifiNetwork} `, ` Device:${spaceBetween}${activeDevice} `, ` Resolution:${spaceBetween}1020x1080 `]
   ]
-  const dataTable = createTable(4, headers, dataRows, 10)
+  const dataTable = createTable(4, headers, dataRows, 8)
 
   console.log(dataTable);
 }
