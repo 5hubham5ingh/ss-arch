@@ -9,7 +9,7 @@ kitty @ resize-window -a vertical -i -10
 kitty @ resize-window -a vertical -i 10
 kitty @ focus-window
 kitty @ launch --type=window --location=hsplit >>/dev/null
-kitty @ resize-window -a vertical -i 6
+kitty @ resize-window -a vertical -i 5
 
 kitty @ set-font-size 12
 
