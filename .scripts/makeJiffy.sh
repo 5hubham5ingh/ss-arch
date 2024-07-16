@@ -12,4 +12,4 @@ git clone https://github.com/bellard/quickjs.git &&
   make &&
   sudo make install &&
   cd ../quickie &&
-  qjsc -fno-typedarray -fno-proxy -fno-bigint main.js
+  qjsc -fno-proxy -fno-bigint main.js
