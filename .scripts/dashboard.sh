@@ -11,13 +11,13 @@ kitty @ focus-window
 kitty @ launch --type=window --location=hsplit >>/dev/null
 kitty @ resize-window -a vertical -i 5
 
-kitty @ set-font-size 12
+kitty @ set-font-size 11.85
 
 (
-	(
-		weather=$(curl -s wttr.in/kanpur | sed -n '8,17p')
-		echo -e "$weather" &&
-			/home/ss/.scripts/js/sysInfo.llrt.js | lolcat -h 0 -v 6 -g 0286fa:02fa1f
-	) &&
-		kitty @ scroll-window 2-
+  (
+    weather=$(curl -s wttr.in/kanpur | sed -n '8,17p')
+    echo -e "$weather" &&
+      /home/ss/.scripts/js/sysInfo.llrt.js | lolcat -h 0 -v 6 -g 0286fa:02fa1f
+  ) &&
+    kitty @ scroll-window 2-
 )
