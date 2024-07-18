@@ -11,6 +11,7 @@ alias n='clear &&'
 
 # Colours
 foreground_color='\033[0;1;36m'
+command_foreground='\033[38;5;101m'
 background_color_black='\033[30m'
 background_color_cyan='\033[46m'
 
@@ -25,7 +26,7 @@ firstLine='\033[0;0H'
 clear_screen='\033[2J'
 
 # Prompt components
-prompt="\n${foreground_color}--> "
+prompt="\n${foreground_color}--> ${command_foreground}"
 dir="${foreground_color}${background_color_black}${background_color_cyan}\W${foreground_color}"
 user_and_host="${foreground_color}${background_color_black}${background_color_cyan}\u${foreground_color}${foreground_color}${background_color_black}${background_color_cyan}@${foreground_color}${foreground_color}${background_color_black}${background_color_cyan}\h${foreground_color}"
 info="${foreground_color}${background_color_black}${background_color_cyan}\A${foreground_color} ${foreground_color}${background_color_black}${background_color_cyan}\d${foreground_color}"
