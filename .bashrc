@@ -11,13 +11,13 @@ alias n='clear &&'
 
 # Colours
 foreground_color='\033[0;1;36m'
-command_foreground='\033[38;5;101m'
+command_foreground='\033[0m'
 background_color_black='\033[30m'
 background_color_cyan='\033[46m'
 
 # Cursor
 start='\033[1G'
-align_mid='\033[$(( (COLUMNS / 2) - 7 ))C'
+align_mid='\033[$(( (COLUMNS / 2) - 9 ))C'
 align_right='\033[$(($COLUMNS-21))C'
 up='\033[A'
 down='\033[B'
@@ -50,3 +50,7 @@ dec_b() {
 export city='kanpur'
 
 export COLUMNS
+
+export PATH=$PATH:/home/ss/.local/bin
+
+eval "$(zoxide init bash)"
