@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+kitty @ set-font-size 11.85
 kitty @ launch --type=window --location=vsplit btop -p 1 >>/dev/null
 
 kitty @ resize-window --self -i 23
@@ -11,7 +12,6 @@ kitty @ focus-window
 kitty @ launch --type=window --location=hsplit >>/dev/null
 kitty @ resize-window -a vertical -i 5
 
-kitty @ set-font-size 11.85
 
 (
   (
@@ -21,3 +21,6 @@ kitty @ set-font-size 11.85
   ) &&
     kitty @ scroll-window 2-
 )
+
+
+#  cal -y -c 5 --color=always

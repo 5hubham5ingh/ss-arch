@@ -7,7 +7,9 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias n='clear &&'
+alias clr='clear'
+alias icat='kitty +kitten icat'
+alias cd='z'
 
 # Colours
 foreground_color='\033[0;1;36m'
@@ -18,7 +20,7 @@ background_color_cyan='\033[46m'
 # Cursor
 start='\033[1G'
 align_mid='\033[$(( (COLUMNS / 2) - 9 ))C'
-align_right='\033[$(($COLUMNS-21))C'
+align_right='\033[$(($COLUMNS-20))C'
 up='\033[A'
 down='\033[B'
 lastLine='\033[9999;0H'
@@ -51,6 +53,6 @@ export city='kanpur'
 
 export COLUMNS
 
+# zoxide
 export PATH=$PATH:/home/ss/.local/bin
-
 eval "$(zoxide init bash)"
