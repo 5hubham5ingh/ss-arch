@@ -44,8 +44,10 @@ const cursorMove = (x, y) => {
   return returnValue;
 };
 
-const containerWidth = 42;
-const containerHeight = 11;
+const imageWidth = 42;
+const imageHeight = 10;
+const containerWidth = imageWidth + 2;
+const containerHeight = imageHeight + 1;
 let [width, height] = ttyGetWinSize(2);
 
 const calculateCoordinates = () => {
@@ -65,8 +67,10 @@ const calculateCoordinates = () => {
   return coordinates;
 }
 
-const xy = calculateCoordinates();
+let xy = calculateCoordinates();
+
 //print(JSON.stringify(xy))
+
 
 let isScreenInsefficient = () => xy.some(([x, y], i) => {
   if (y + containerHeight > height) return true;
@@ -80,12 +84,12 @@ while (isScreenInsefficient()) {
   width = w;
   height = h;
 }
-
+xy = calculateCoordinates();
 wallpapers.forEach((wallpaper, i) => {
   const wallpaperDir = `${wallpapersDir}/${wallpaper}`;
   const [x, y] = xy[i];
-  const cordinates = `40x10@${x}x${y}`;
-  exec(['kitten', 'icat', '--place', cordinates, wallpaperDir])
+  const cordinates = `${imageWidth}x${imageHeight}@${x}x${y}`;
+  exec(['kitten', 'icat', '--scale-up', '--place', cordinates, wallpaperDir])
 })
 
 let selection = 0;
