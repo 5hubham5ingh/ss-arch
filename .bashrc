@@ -10,6 +10,7 @@ alias grep='grep --color=auto'
 alias clr='clear'
 alias icat='kitty +kitten icat'
 alias cd='z'
+alias df='git difftool --no-symlinks --dir-diff'
 
 # Colours
 foreground_color='\033[0;1;36m'
@@ -56,3 +57,5 @@ export COLUMNS
 # zoxide
 export PATH=$PATH:/home/ss/.local/bin
 eval "$(zoxide init bash)"
+
+# git
