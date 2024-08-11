@@ -50,7 +50,10 @@ dec_b() {
   ~/.scripts/decrease_brightness.sh
 }
 
-export city='kanpur'
+export city=kanpur
+
+
+export ForegroundColour=#32a851
 
 export COLUMNS
 
