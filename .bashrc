@@ -10,7 +10,7 @@ alias grep='grep --color=auto'
 alias clr='clear'
 alias icat='kitty +kitten icat'
 alias cd='z'
-alias df='git difftool --no-symlinks --dir-diff'
+alias diff='git difftool --no-symlinks --dir-diff'
 
 # Colours
 foreground_color='\033[0;1;36m'
@@ -51,7 +51,6 @@ dec_b() {
 }
 
 export city=kanpur
-
 
 export ForegroundColour=#32a851
 
