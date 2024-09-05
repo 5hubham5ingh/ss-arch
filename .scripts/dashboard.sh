@@ -6,8 +6,7 @@ kitty @ launch --type=window --location=vsplit btop -p 1 >>/dev/null
 kitty @ resize-window --self -i 23
 
 kitty @ launch --type=window --location=hsplit btop -p 2 >>/dev/null
-kitty @ resize-window -a vertical -i -10
-kitty @ resize-window -a vertical -i 10
+kitty @ resize-window -a vertical -i -5
 kitty @ focus-window
 kitty @ launch --type=window --location=hsplit >>/dev/null
 kitty @ resize-window -a vertical -i 5

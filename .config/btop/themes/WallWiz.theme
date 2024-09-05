@@ -1,0 +1,86 @@
+# Main background
+theme[main_bg]="#061212"
+
+# Main text color
+theme[main_fg]="#A7C591"
+
+# Title color for boxes
+theme[title]="#A7C591"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#4B3529"
+
+# Background color of selected items
+theme[selected_bg]="#316954"
+
+# Foreground color of selected items
+theme[selected_fg]="#B0A448"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#061212"
+
+# Color of text appearing on top of graphs
+theme[graph_text]="#A7C591"
+
+# Misc colors for processes box (includes mini CPU graphs, memory graphs, etc.)
+theme[proc_misc]="#A7C591"
+
+# CPU box outline color
+theme[cpu_box]="#316954"
+
+# Memory/disks box outline color
+theme[mem_box]="#316954"
+
+# Network up/down box outline color
+theme[net_box]="#316954"
+
+# Processes box outline color
+theme[proc_box]="#316954"
+
+# Box divider lines and small box borders
+theme[div_line]="#316954"
+
+# Temperature graph gradient
+theme[temp_start]="#A7C591"
+theme[temp_mid]="#B0A448"
+theme[temp_end]="#4B3529"
+
+# CPU graph gradient
+theme[cpu_start]="#A7C591"
+theme[cpu_mid]="#B0A448"
+theme[cpu_end]="#4B3529"
+
+# Memory/Disk free meter gradient
+theme[free_start]="#4B3529"
+theme[free_mid]="#B0A448"
+theme[free_end]="#A7C591"
+
+# Memory/Disk cached meter gradient
+theme[cached_start]="#67A385"
+theme[cached_mid]="#A7C591"
+theme[cached_end]="#B0A448"
+
+# Memory/Disk available meter gradient
+theme[available_start]="#4B3529"
+theme[available_mid]="#B0A448"
+theme[available_end]="#A7C591"
+
+# Memory/Disk used meter gradient
+theme[used_start]="#A7C591"
+theme[used_mid]="#B0A448"
+theme[used_end]="#4B3529"
+
+# Download graph gradient
+theme[download_start]="#A7C591"
+theme[download_mid]="#67A385"
+theme[download_end]="#90A96E"
+
+# Upload graph gradient
+theme[upload_start]="#B0A448"
+theme[upload_mid]="#8B6A2A"
+theme[upload_end]="#4B3529"
+
+# Process box color gradient for threads, memory, and CPU usage
+theme[process_start]="#A7C591"
+theme[process_mid]="#4B3529"
+theme[process_end]="#90A96E"

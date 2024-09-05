@@ -6,11 +6,13 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
+alias yz='yazi'
 alias grep='grep --color=auto'
 alias clr='clear'
 alias icat='kitty +kitten icat'
 alias cd='z'
 alias diff='git difftool --no-symlinks --dir-diff'
+alias ww='WallWiz'
 
 # Colours
 foreground_color='\033[0;1;36m'
@@ -37,22 +39,7 @@ info="${foreground_color}${background_color_black}${background_color_cyan}\A$
 # Prompt string
 PS1="${dir}${start}${align_mid}${user_and_host}${start}${align_right}${info}${prompt}"
 
-weather() {
-  # TODO - impliment caching of weather data
-  curl -s wttr.in | sed -n '8,17p'
-}
-
-inc_b() {
-  ~/.scripts/increase_brightness.sh
-}
-
-dec_b() {
-  ~/.scripts/decrease_brightness.sh
-}
-
 export city=kanpur
-
-export ForegroundColour=#32a851
 
 export COLUMNS
 
@@ -60,4 +47,6 @@ export COLUMNS
 export PATH=$PATH:/home/ss/.local/bin
 eval "$(zoxide init bash)"
 
-# git
+# deno
+export DENO_INSTALL="/home/ss/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
