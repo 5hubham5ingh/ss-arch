@@ -50,3 +50,7 @@ eval "$(zoxide init bash)"
 # deno
 export DENO_INSTALL="/home/ss/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+export FZF_DEFAULT_OPTS='
+  --color fg:-1,bg:-1,hl:-1,fg+:-1,bg+:-1,hl+:-1
+  --color info:-1,prompt:-1,spinner:-1,pointer:-1,marker:-1
+'
