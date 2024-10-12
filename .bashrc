@@ -55,4 +55,5 @@ export FZF_DEFAULT_OPTS='
   --color info:-1,prompt:-1,spinner:-1,pointer:-1,marker:-1
 '
 
-export WALLPAPER_DIR="/home/ss/Downloads/wallpapers/"
+export WALLPAPER_DIR="/home/ss/pics/walls/"
+export WALLPAPER_REPO_URLS="https://github.com/D3Ext/aesthetic-wallpapers/tree/main/images ; https://github.com/5hubham5ingh/WallWiz/tree/wallpapers/"
