@@ -77,7 +77,7 @@ kitty @ launch --type=window --location=vsplit sh -c "$(
   cat <<'EOF'
 while true; do
   echo -e "\u001Bc"
-  curl -s wttr.in/kanpur | sed -n '2,7p'
+  curl -s wttr.in/"$city" | sed -n '2,7p'
   sleep 4h
 done
 EOF
