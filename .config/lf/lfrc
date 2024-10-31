@@ -1,5 +1,5 @@
 set shell sh
-
+set pager bat
 
 map . set hidden!
 set ratios '1:2:5'
@@ -15,9 +15,13 @@ map '"'
 map d
 map c
 map e edit
-map f
+map F preview
 
 cmd edit $nvim $f
+
+cmd preview ${{
+    kitty @ launch --type=overlay bat $f
+  }}
 
 cmd fzf_jump ${{
   res="$(find . -maxdepth 5 | fzf --reverse --header='Jump to location')"
