@@ -1,5 +1,5 @@
 set shell sh
-set pager bat
+
 
 map . set hidden!
 set ratios '1:2:5'
@@ -20,7 +20,16 @@ map F preview
 cmd edit $nvim $f
 
 cmd preview ${{
-    kitty @ launch --type=overlay bat $f
+  case $f in
+  *.png) kitty @ launch --type=overlay kitten icat --hold "$f" ;;
+  *.jpg) kitty @ launch --type=overlay kitten icat --hold "$f" ;;
+  *.jpeg) kitty @ launch --type=overlay kitten icat --hold "$f" ;;
+  *.webp) kitty @ launch --type=overlay kitten icat --hold "$f" ;;
+  *.md) cat "$f" | gum format --type="markdown" | bat --wrap=auto --color=always --theme=base16 --style=full ;;
+  *.json) cat "$f" | jq -C | bat --wrap=auto --color=always --style=full --theme=base16 --italic-text=always ;;
+  *.jsonc) cat "$f" | jq -C | bat --wrap=auto --color=always --style=full --theme=base16 --italic-text=always ;;
+  *) kitty @ launch --type=overlay bat --wrap=auto --color=always --style=full --theme=base16 --italic-text=always $f ;;
+  esac
   }}
 
 cmd fzf_jump ${{

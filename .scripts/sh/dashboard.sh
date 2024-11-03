@@ -85,6 +85,6 @@ EOF
 
 kitty @ focus-window
 kitty @ resize-window -a horizontal -i -20
-kitty +kitten icat --align=left --place 30x30@0x0 ~/pics/ss.png
+kitty +kitten icat --align=left --place 30x30@0x0 ~/pics/ssOld.png
 echo -e "\n\n\n\n\n\n\n\n"
 read
