@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-kitty @ set-font-size 14
+kitty @ set-font-size 13
 kitty @ launch --type=window --location=hsplit btop -p 1 >>/dev/null
 kitty @ resize-window -a vertical -i 15
 kitty @ launch --type=window --location=vsplit btop -p 2 >>/dev/null
@@ -55,29 +55,27 @@ while true; do
     sysInfo=$(gum join --vertical --align="right" "$packages" "$brightness" "$volAndWifi")
 
     echo -e "\u001Bc"
-    gum join "$sysInfo" "$cal"
-    kitty @ scroll-window 1-
+    gum join "$sysInfo" "$cal" 
   fi
 
-  sleep 30s
+  sleep 5s
 done
 EOF
 )" >>/dev/null
 
-kitty @ resize-window -a horizontal -i -22
+kitty @ resize-window -a horizontal -i -29
 kitty @ focus-window
 kitty @ launch --type=window --location=vsplit peaclock >>/dev/null
 kitty @ resize-window -a horizontal -i 15
-kitty @ send-key "s" &&
-  kitty @ send-key "d" &&
+kitty @ send-key s d &&
   kitty @ focus-window &&
-  kitty @ resize-window -a horizontal -i 12
+  kitty @ resize-window -a horizontal -i 6
 
 kitty @ launch --type=window --location=vsplit sh -c "$(
   cat <<'EOF'
 while true; do
   echo -e "\u001Bc"
-  curl -s wttr.in/"$city" | sed -n '2,7p'
+  curl -s wttr.in/"$city" | sed -n '2,7p' 
   sleep 4h
 done
 EOF
@@ -85,6 +83,6 @@ EOF
 
 kitty @ focus-window
 kitty @ resize-window -a horizontal -i -20
-kitty +kitten icat --align=left --place 30x30@0x0 ~/pics/ssOld.png
+kitty +kitten icat --align=center --place 20x20@0x0 --scale ~/pics/ss.png
 echo -e "\n\n\n\n\n\n\n\n"
 read
