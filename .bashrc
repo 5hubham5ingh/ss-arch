@@ -12,7 +12,7 @@ alias clr='clear'
 alias icat='kitty +kitten icat'
 alias cd='z'
 alias diff='git difftool --no-symlinks --dir-diff'
-alias ww='WallWiz'
+alias wr='WallRizz'
 
 # Colours
 foreground_color='\033[0;1;36m'
@@ -29,17 +29,18 @@ down='\033[B'
 lastLine='\033[9999;0H'
 firstLine='\033[0;0H'
 clear_screen='\033[2J'
+reset='\033[0m'
 
 # Prompt components
-prompt="\n${foreground_color}--> ${command_foreground}"
+prompt="${foreground_color}--> ${command_foreground}"
 dir="${foreground_color}${background_color_black}${background_color_cyan}\W${foreground_color}"
 user_and_host="${foreground_color}${background_color_black}${background_color_cyan}\u${foreground_color}${foreground_color}${background_color_black}${background_color_cyan}@${foreground_color}${foreground_color}${background_color_black}${background_color_cyan}\h${foreground_color}"
 info="${foreground_color}${background_color_black}${background_color_cyan}\A${foreground_color} ${foreground_color}${background_color_black}${background_color_cyan}\d${foreground_color}"
 
 # Prompt string
-PS1="${dir}${start}${align_mid}${user_and_host}${start}${align_right}${info}${prompt}"
-
-export city=kanpur
+#PS1="${align_right}${info}${up}${start}${prompt}"
+#PS1="${dir}${start}${align_mid}${user_and_host}${start}${align_right}${info}${prompt}"
+PS1="${dir}${reset} "
 
 export COLUMNS
 
@@ -50,10 +51,6 @@ eval "$(zoxide init bash)"
 # deno
 export DENO_INSTALL="/home/ss/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
-export FZF_DEFAULT_OPTS='
-  --color fg:-1,bg:-1,hl:-1,fg+:-1,bg+:-1,hl+:-1
-  --color info:-1,prompt:-1,spinner:-1,pointer:-1,marker:-1
-'
 
 export WALLPAPER_DIR="/home/ss/pics/walls/"
 export WALLPAPER_REPO_URLS="https://github.com/D3Ext/aesthetic-wallpapers/tree/main/images ; https://github.com/5hubham5ingh/WallWiz/tree/wallpapers/"
