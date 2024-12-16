@@ -17,7 +17,7 @@ alias wr='WallRizz'
 # Colours
 foreground_color='\033[0;1;36m'
 command_foreground='\033[0m'
-background_color_black='\033[30m'
+foreground_color_black='\033[38;2;0;0;0m'
 background_color_cyan='\033[46m'
 
 # Cursor
@@ -33,14 +33,14 @@ reset='\033[0m'
 
 # Prompt components
 prompt="${foreground_color}--> ${command_foreground}"
-dir="${foreground_color}${background_color_black}${background_color_cyan}\W${foreground_color}"
+dir="\[${foreground_color}${foreground_color_black}${background_color_cyan}\]\W\[${foreground_color}\]"
 user_and_host="${foreground_color}${background_color_black}${background_color_cyan}\u${foreground_color}${foreground_color}${background_color_black}${background_color_cyan}@${foreground_color}${foreground_color}${background_color_black}${background_color_cyan}\h${foreground_color}"
-info="${foreground_color}${background_color_black}${background_color_cyan}\A${foreground_color} ${foreground_color}${background_color_black}${background_color_cyan}\d${foreground_color}"
+info="\[${foreground_color}${foreground_color_black}${background_color_cyan}\]\A\[${foreground_color} ${foreground_color}${foreground_color_black}${background_color_cyan}\]\d\[${foreground_color}\]"
 
 # Prompt string
-#PS1="${align_right}${info}${up}${start}${prompt}"
+PS1="\[${align_right}\]${info}\[${start}\]--> "
 #PS1="${dir}${start}${align_mid}${user_and_host}${start}${align_right}${info}${prompt}"
-PS1="${dir}${reset} "
+# PS1="${dir}\[${reset}\] "
 
 export COLUMNS
 
