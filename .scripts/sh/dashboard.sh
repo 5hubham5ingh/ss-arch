@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-kitty @ set-font-size 13
+kitty @ set-font-size 12
 kitty @ launch --type=window --location=hsplit btop -p 1 >>/dev/null
-kitty @ resize-window -a vertical -i 15
+kitty @ resize-window -a vertical -i 14
 kitty @ launch --type=window --location=vsplit btop -p 2 >>/dev/null
 kitty @ send-key 5
 kitty @ launch --type=window --location=hsplit cava >>/dev/null
@@ -28,8 +28,8 @@ while true; do
   brightness_value=$(( $(brightnessctl g) * 100 / $(brightnessctl max) ))
   network_name=$(iwconfig wlan0 | grep -oP 'ESSID:"\K[^"]+')
 
-  border_colour=$(kitty @ get-colors | grep selection_background | sed 's/.*#/#/')
-  border_colour2=$(kitty @ get-colors | grep selection_foreground | sed 's/.*#/#/')
+  border_colour=$(kitty @ get-colors | grep color0 | sed 's/.*#/#/')
+  border_colour2=$(kitty @ get-colors | grep color2 | sed 's/.*#/#/')
 
   if [[ "$packagesCount" != "$old_packagesCount" ]] ||
      [[ "$volume_value" != "$old_volume_value" ]] ||
@@ -56,6 +56,7 @@ while true; do
 
     echo -e "\u001Bc"
     gum join "$sysInfo" "$cal" 
+    kitten @ scroll-window 1-
   fi
 
   sleep 5s
@@ -67,9 +68,11 @@ kitty @ resize-window -a horizontal -i -29
 kitty @ focus-window
 kitty @ launch --type=window --location=vsplit peaclock >>/dev/null
 kitty @ resize-window -a horizontal -i 15
-kitty @ send-key s d &&
-  kitty @ focus-window &&
-  kitty @ resize-window -a horizontal -i 6
+kitten @ send-key s
+sleep 0.5
+kitten @ send-key d
+kitten @ focus-window
+kitten @ resize-window -a horizontal -i 6
 
 kitty @ launch --type=window --location=vsplit sh -c "$(
   cat <<'EOF'
@@ -82,7 +85,6 @@ EOF
 )" >>/dev/null
 
 kitty @ focus-window
-kitty @ resize-window -a horizontal -i -20
-kitty +kitten icat --align=center --place 20x20@0x0 --scale ~/pics/ss.png
-echo -e "\n\n\n\n\n\n\n\n"
+kitty @ resize-window -a horizontal -i -18
+kitty +kitten icat --align=center --place 20x20@1x1 --scale ~/pics/ss.png
 read

@@ -15,8 +15,8 @@ case "$1" in
 *.jpg) kitty icat --clear --stdin=no --transfer-mode=file --place "${w}x${h}@${x}x${y}" "$1" >/dev/tty ;;
 *.jpeg) kitty icat --clear --stdin=no --transfer-mode=file --place "${w}x${h}@${x}x${y}" "$1" >/dev/tty ;;
 *.webp) kitty icat --clear --stdin=no --transfer-mode=file --place "${w}x${h}@${x}x${y}" "$1" >/dev/tty ;;
-*.md) cat "$1" | gum format --type="markdown" | bat --wrap=auto --color=always --theme=base16 --style=full --terminal-width "$((w - 5))" ;;
+*.md) cat "$1" | glow ;;
 *)
-  bat --wrap=auto --color=always --style=full --theme=base16 --italic-text=always --terminal-width "$((w - 5))" "$1"
+  bat --wrap=auto --color=always -p --theme=base16 --italic-text=always --terminal-width "$((w - 5))" "$1"
   ;;
 esac
