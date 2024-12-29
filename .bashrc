@@ -13,6 +13,10 @@ alias icat='kitty +kitten icat'
 alias cd='z'
 alias diff='git difftool --no-symlinks --dir-diff'
 alias wr='WallRizz'
+fzf-icat() {
+  fzf --layout=reverse --color=16,current-bg:-1,current-fg:-1 --prompt= --marker= --pointer= --info inline-right --preview-window='70%,border-none' --preview='kitty icat --clear --transfer-mode=memory --stdin=no --scale-up --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}'
+}
+alias fzi='fzf-icat'
 
 # Colours
 foreground_color='\033[0;1;36m'
@@ -38,9 +42,10 @@ user_and_host="${foreground_color}${background_color_black}${background_color
 info="\[${foreground_color}${foreground_color_black}${background_color_cyan}\]\A\[${foreground_color} ${foreground_color}${foreground_color_black}${background_color_cyan}\]\d\[${foreground_color}\]"
 
 # Prompt string
-PS1="\[${align_right}\]${info}\[${start}\]--> "
+# PS1="\[${align_right}\]${info}\[${start}\]-->\[${reset}\] "
 #PS1="${dir}${start}${align_mid}${user_and_host}${start}${align_right}${info}${prompt}"
 # PS1="${dir}\[${reset}\] "
+PS1="--> "
 
 export COLUMNS
 
