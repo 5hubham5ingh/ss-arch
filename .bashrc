@@ -5,6 +5,10 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+if [ -f ~/.system_specific_shell_config ]; then
+  source ~/.system_specific_shell_config
+fi
+
 alias ls='ls --color=auto'
 alias yz='yazi'
 alias grep='grep --color=auto'
@@ -59,3 +63,6 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 export WALLPAPER_DIR="/home/ss/pics/walls/"
 export WALLPAPER_REPO_URLS="https://github.com/D3Ext/aesthetic-wallpapers/tree/main/images ; https://github.com/5hubham5ingh/WallWiz/tree/wallpapers/"
+
+# Jiffy
+export TERMINAL="kitty -1 --hold"
