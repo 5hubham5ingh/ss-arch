@@ -17,10 +17,9 @@ alias icat='kitty +kitten icat'
 alias cd='z'
 alias diff='git difftool --no-symlinks --dir-diff'
 alias wr='WallRizz'
-fzf-icat() {
+fzi() {
   fzf --layout=reverse --color=16,current-bg:-1,current-fg:-1 --prompt= --marker= --pointer= --info inline-right --preview-window='70%,border-none' --preview='kitty icat --clear --transfer-mode=memory --stdin=no --scale-up --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}'
 }
-alias fzi='fzf-icat'
 
 # Colours
 foreground_color='\033[0;1;36m'
@@ -61,7 +60,7 @@ eval "$(zoxide init bash)"
 export DENO_INSTALL="/home/ss/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-export WALLPAPER_DIR="/home/ss/pics/walls/"
+export WALLPAPER_DIR="/home/ss/pics/walls/1920x1080/"
 export WALLPAPER_REPO_URLS="https://github.com/D3Ext/aesthetic-wallpapers/tree/main/images ; https://github.com/5hubham5ingh/WallWiz/tree/wallpapers/"
 
 # Jiffy
