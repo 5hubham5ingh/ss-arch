@@ -1,0 +1,29 @@
+{
+  "Power Menu": [
+    {
+      "name": "Shutdown",
+      "exec": "shutdown -P now",
+      "description": "System shutdown.",
+      "icon": "/home/ss/pics/ss.png"
+    },
+    {
+      "name": "Sleep",
+      "exec": "shutdown -H now",
+      "description": "System sleep.",
+      "icon": "/home/ss/pics/ss.png"
+    },
+    {
+      "name": "Reboot",
+      "exec": "shutdown -r now",
+      "description": "System reboot.",
+      "icon": "/home/ss/pics/ss.png"
+    },
+    {
+      "name": "List scheduled shutdown.",
+      "exec": "shutdown --show",
+      "description": "List scheduled shutdown.",
+      "icon": "/home/ss/pics/ss.png",
+      "terminal": true
+    }
+  ]
+}
