@@ -9,14 +9,7 @@ export async function setWallpaper(wallpaperPath) {
     wallpaperPath,
     generateRandomSwwwOptions(),
   );
-  const setWallpaperPromise = execAsync(command);
-  // const wallRizzFoxWallpaperPathCacheFile = STD.open(
-  //   HOME_DIR.concat("/.cache/WallRizzFox/wallpaperPath.txt"),
-  //   "w+",
-  // );
-  // wallRizzFoxWallpaperPathCacheFile.puts(wallpaperPath.trim());
-  // wallRizzFoxWallpaperPathCacheFile.close();
-  return setWallpaperPromise;
+  await execAsync(command);
 }
 
 function createSwwwCommand(imagePath, options) {

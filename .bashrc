@@ -9,6 +9,11 @@ if [ -f ~/.system_specific_shell_config ]; then
   source ~/.system_specific_shell_config
 fi
 
+source ~/.fzf-completion.sh
+
+# vim mode
+set -o vi
+
 alias ls='ls --color=auto'
 alias yz='yazi'
 alias grep='grep --color=auto'
@@ -65,3 +70,7 @@ export WALLPAPER_REPO_URLS="https://github.com/D3Ext/aesthetic-wallpapers/tree/m
 
 # Jiffy
 export TERMINAL="kitty -1 --hold"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
