@@ -17,8 +17,21 @@ export function getLightThemeConf(colors) {
   return generateThemeConfig(theme);
 }
 
-export function setTheme(themeConfPath) {
-  return execAsync(["kitty", "@", "set-colors", "-a", "-c", themeConfPath]);
+export async function setTheme(themeConfPath, wallpaperPath) {
+  await execAsync(["kitty", "@", "set-colors", "-a", "-c", themeConfPath]);
+
+  const kittyWallpapersDirPath = HOME_DIR.concat("/pics/walls/1810x970.kitty/");
+  const wallpaperNameIndex = wallpaperPath.lastIndexOf("/") + 1;
+
+  const wallpaperName = wallpaperPath.slice(wallpaperNameIndex).split(".")[0];
+
+  await execAsync([
+    "kitty",
+    "@",
+    "set-background-image",
+    // "-a",
+    `${kittyWallpapersDirPath}${wallpaperName}.png`,
+  ]);
 }
 
 function generateTheme(colorCodes, isDark = true) {
@@ -81,7 +94,7 @@ active_border_color ${theme.color4.saturate().toHexString()}
 inactive_border_color ${theme.color4.desaturate().toHexString()}
 
 foreground ${theme.foreground.toHexString()}
-background ${theme.background.darken().toHexString()}
+background ${theme.background.clone().darken().toHexString()}
 
 active_tab_foreground ${theme.background.lighten(5).toHexString()}
 active_tab_background ${theme.foreground.desaturate().toHexString()}

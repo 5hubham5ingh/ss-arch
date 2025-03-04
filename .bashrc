@@ -9,7 +9,13 @@ if [ -f ~/.system_specific_shell_config ]; then
   source ~/.system_specific_shell_config
 fi
 
-source ~/.fzf-completion.sh
+if [ -f ~/.api-keys.sh ]; then
+  source ~/.api-keys.sh
+fi
+
+if [ -f ~/.fzf-completion.sh ]; then
+  source ~/.fzf-completion.sh
+fi
 
 # vim mode
 set -o vi
@@ -24,6 +30,9 @@ alias diff='git difftool --no-symlinks --dir-diff'
 alias wr='WallRizz'
 fzi() {
   fzf --layout=reverse --color=16,current-bg:-1,current-fg:-1 --prompt= --marker= --pointer= --info inline-right --preview-window='70%,border-none' --preview='kitty icat --clear --transfer-mode=memory --stdin=no --scale-up --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}'
+}
+g-tar() {
+  tar -czvf "$1"-linux-86_64.tar.gz "$1"
 }
 
 # Colours
@@ -65,7 +74,7 @@ eval "$(zoxide init bash)"
 export DENO_INSTALL="/home/ss/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-export WALLPAPER_DIR="/home/ss/pics/walls/1920x1080/"
+export WALLPAPER_DIR="/home/ss/pics/walls/1920x1080.anime/"
 export WALLPAPER_REPO_URLS="https://github.com/D3Ext/aesthetic-wallpapers/tree/main/images ; https://github.com/5hubham5ingh/WallWiz/tree/wallpapers/"
 
 # Jiffy

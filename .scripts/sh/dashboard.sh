@@ -85,6 +85,10 @@ EOF
 )" >>/dev/null
 
 kitty @ focus-window
-kitty @ resize-window -a horizontal -i -18
-kitty +kitten icat --align=center --place 20x20@1x1 --scale ~/pics/ss.png
-read
+kitty @ resize-window -a horizontal -i -15
+
+while true; do
+  border_colour2=$(kitty @ get-colors | grep selection_background | awk '{print $2}')
+  ./.scripts/sh/ss.sh "$border_colour2" | kitty +kitten icat --align=center --place 20x20@1x0 --scale
+  sleep 5s
+done
