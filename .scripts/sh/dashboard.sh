@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-kitty @ set-font-size 12
+kitty @ set-font-size 8
 kitty @ launch --type=window --location=hsplit btop -p 1 >>/dev/null
 kitty @ resize-window -a vertical -i 14
 kitty @ launch --type=window --location=vsplit btop -p 2 >>/dev/null
@@ -89,6 +89,6 @@ kitty @ resize-window -a horizontal -i -15
 
 while true; do
   border_colour2=$(kitty @ get-colors | grep selection_background | awk '{print $2}')
-  ./.scripts/sh/ss.sh "$border_colour2" | kitty +kitten icat --align=center --place 20x20@1x0 --scale
+  /home/ss/.scripts/sh/ss.sh "$border_colour2" | kitty +kitten icat --align=center --place 20x20@1x0 --scale
   sleep 5s
 done
