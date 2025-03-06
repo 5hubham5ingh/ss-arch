@@ -1,0 +1,1 @@
+/home/ss/dev/foxpanel/main.js

@@ -80,7 +80,7 @@ function createHyprlandTheme(colors, isDark = true) {
       activeBorder2.toHexString(),
     ],
     inactiveBorder: inactiveBorder.toHexString(),
-    shadow: backgroundSource.setAlpha(0.4).toHexString(),
+    shadow: backgroundSource.clone().setAlpha(0.4).toHex8String(),
     groupColors: {
       activeGroup: activeBorder1.toHexString(),
       inactiveGroup: activeBorder2.toHexString(),

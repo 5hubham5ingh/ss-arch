@@ -1,6 +1,6 @@
 /** @format */
 // @ts-ignore
-import * as _os from 'os';
+import * as _os from "os";
 
 const os = /** @type {any} **/ (_os);
 
@@ -12,7 +12,7 @@ const os = /** @type {any} **/ (_os);
   - timers
   - asynchronous I/O
   - workers (threads)
-  
+
   The OS functions usually return 0 if OK or an OS specific negative error code.
  */
 
@@ -580,7 +580,7 @@ export const platform = os.platform;
  */
 
 // @ts-ignore
-export { Worker } from 'os';
+export { Worker } from "os";
 
 /**
  * Create a Worker

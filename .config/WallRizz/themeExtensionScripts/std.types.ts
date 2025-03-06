@@ -1,7 +1,7 @@
 /** @format */
 // @ts-check
 // @ts-ignore
-import * as std from 'std';
+import * as std from "std";
 
 /*
   The std module provides wrappers to the libc stdlib.h and stdio.h and a few other utilities
@@ -196,7 +196,7 @@ const _out = /** @type {StdFile} */ (std.out);
  * Wrappers to the libc file stderr
  */
 const _err = /** @type {StdFile} */ (std.err);
-export { _in as in, _out as out, _err as err };
+export { _err as err, _in as in, _out as out };
 
 /**
  * Enumeration object containing the integer value of common errors

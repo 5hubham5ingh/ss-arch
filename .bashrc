@@ -34,6 +34,10 @@ fzi() {
 g-tar() {
   tar -czvf "$1"-linux-86_64.tar.gz "$1"
 }
+vdo() {
+  # speed the video for smooth playback
+  ffmpeg -i "$1" -filter:v "setpts=0.8*PTS" -an "$1".smooth.mp4
+}
 
 # Colours
 foreground_color='\033[0;1;36m'

@@ -6,12 +6,12 @@
 */
 
 export function getDarkThemeConf(colors) {
-  const theme = generateTheme(colors, true);
+  const theme = generateTheme(colors, false);
   return generateThemeConfig(theme);
 }
 
 export function getLightThemeConf(colors) {
-  const theme = generateTheme(colors, false);
+  const theme = generateTheme(colors);
   return generateThemeConfig(theme);
 }
 
@@ -30,7 +30,7 @@ function generateTheme(colorCodes, isDark = true) {
   const colors = colorCodes.map((c) => Color(c));
 
   // Select distinct colors for various UI elements
-  const foreground = isDark ? Color("white") : Color("black");
+  const foreground = isDark ? Color("white") : Color("#666666");
   const [
     popup,
     background,
@@ -57,7 +57,7 @@ function generateTheme(colorCodes, isDark = true) {
     accentSecondary,
     complimentry1,
     complimentry2,
-    variant: isDark ? "dark" : "light",
+    variant: !isDark ? "dark" : "light",
   };
 }
 
@@ -90,10 +90,10 @@ function generateThemeConfig(theme) {
       toolbar_top_separator: theme.accentPrimary.toHexString(),
       toolbar_vertical_separator: theme.backgroundLight.toHexString(),
       toolbar_bottom_separator: theme.background.toHexString(),
-      ntp_card_background: theme.backgroundExtra.clone().setAlpha(0.5)
-        .toHex8String(),
-      ntp_background: theme.background.clone().setAlpha(0.5).toHex8String(),
-      ntp_text: theme.foreground.toHexString(),
+      ntp_card_background: theme.backgroundExtra
+        .toHexString(),
+      ntp_background: theme.background.toHexString(),
+      ntp_text: theme.foreground.clone().lighten(100).toHexString(),
       popup: theme.popup.toHexString(),
       popup_border: theme.popup.toHexString(),
       popup_text: theme.foreground.toHexString(),

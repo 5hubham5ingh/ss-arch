@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-kitty @ set-font-size 8
+kitty @ set-font-size 12
 kitty @ launch --type=window --location=hsplit btop -p 1 >>/dev/null
 kitty @ resize-window -a vertical -i 14
 kitty @ launch --type=window --location=vsplit btop -p 2 >>/dev/null

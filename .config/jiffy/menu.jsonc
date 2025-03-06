@@ -4,26 +4,57 @@
       "name": "Shutdown",
       "exec": "shutdown -P now",
       "description": "System shutdown.",
+      "keywords": "Power off, Shutdown, Turn off.",
       "icon": "/home/ss/pics/ss.png"
     },
     {
       "name": "Sleep",
       "exec": "shutdown -H now",
       "description": "System sleep.",
+      "keywords": "Sleep, Snooze, Pause, Idle.",
       "icon": "/home/ss/pics/ss.png"
     },
     {
       "name": "Reboot",
       "exec": "shutdown -r now",
       "description": "System reboot.",
+      "keywords": "Restart, Power reset, Turn Off then On.",
       "icon": "/home/ss/pics/ss.png"
     },
     {
       "name": "List scheduled shutdown.",
       "exec": "shutdown --show",
-      "description": "List scheduled shutdown.",
+      "description": "List all pending shutdowns if any.",
+      "keywords": "Shutdown plans, Power Off schedule.",
       "icon": "/home/ss/pics/ss.png",
       "terminal": true
+    }
+  ],
+  "Desktop themes": [
+    {
+      "name": " Default",
+      "exec": "/home/ss/.config/jiffy/changeDesktopTheme.sh",
+      "description": "Change system theme to the default colors and wallpapers.",
+      "keywords": "System theme, Default, Mix"
+    },
+    {
+      "name": " Matte colors",
+      "exec": "/home/ss/.config/jiffy/changeDesktopTheme.sh mu",
+      "description": "Change system theme to Matte color and wallpapers.",
+      "keywords": "Matte colors and wallpapers, No opacity and blur."
+    },
+    {
+      "name": " Anime",
+      "exec":  "/home/ss/.config/jiffy/changeDesktopTheme.sh anime",
+      "description": "Change system theme to Anime wallpapers and colors.",
+      "keywords": "Anime wallpapers and colors, Low opacity."
+    }
+  ],
+  "System": [
+    {
+      "name": " Scan for Wifi.",
+      "exec": "iwctl station wlan0 scan",
+      "description": "Scan for Wifi network. Will auto connect to known network."
     }
   ]
 }
