@@ -61,6 +61,7 @@ function generateTheme(colorCodes, isDark = true) {
   };
 }
 
+const enableBlur = STD.getenv("enableBlur");
 function generateThemeConfig(theme) {
   return JSON.stringify({
     colors: {
@@ -90,9 +91,13 @@ function generateThemeConfig(theme) {
       toolbar_top_separator: theme.accentPrimary.toHexString(),
       toolbar_vertical_separator: theme.backgroundLight.toHexString(),
       toolbar_bottom_separator: theme.background.toHexString(),
-      ntp_card_background: theme.backgroundExtra
-        .toHexString(),
-      ntp_background: theme.background.toHexString(),
+      ntp_card_background: enableBlur
+        ? theme.backgroundExtra.clone().setAlpha(0.5)
+          .toHex8String()
+        : theme.backgroundExtra.toHexString(),
+      ntp_background: enableBlur
+        ? theme.background.clone().setAlpha(0.4).toHex8String()
+        : theme.background.toHexString(),
       ntp_text: theme.foreground.clone().lighten(100).toHexString(),
       popup: theme.popup.toHexString(),
       popup_border: theme.popup.toHexString(),

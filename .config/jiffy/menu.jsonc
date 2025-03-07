@@ -33,13 +33,13 @@
   "Desktop themes": [
     {
       "name": " Default",
-      "exec": "/home/ss/.config/jiffy/changeDesktopTheme.sh",
+      "exec": "/home/ss/.config/jiffy/changeDesktopTheme.sh default",
       "description": "Change system theme to the default colors and wallpapers.",
       "keywords": "System theme, Default, Mix"
     },
     {
       "name": " Matte colors",
-      "exec": "/home/ss/.config/jiffy/changeDesktopTheme.sh mu",
+      "exec": "/home/ss/.config/jiffy/changeDesktopTheme.sh matte",
       "description": "Change system theme to Matte color and wallpapers.",
       "keywords": "Matte colors and wallpapers, No opacity and blur."
     },
@@ -55,6 +55,16 @@
       "name": " Scan for Wifi.",
       "exec": "iwctl station wlan0 scan",
       "description": "Scan for Wifi network. Will auto connect to known network."
+    },
+    {
+      "name": " Light theme.",
+      "exec": "/home/ss/.config/jiffy/changeDesktopTheme.sh _ light",
+      "description": "Enable light mode system wide."
+    },
+    {
+      "name": " Dark theme.",
+      "exec": "/home/ss/.config/jiffy/changeDesktopTheme.sh _ dark",
+      "description": "Enable dark mode system wide."
     }
   ]
 }

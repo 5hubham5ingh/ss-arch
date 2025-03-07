@@ -38,6 +38,10 @@ vdo() {
   # speed the video for smooth playback
   ffmpeg -i "$1" -filter:v "setpts=0.8*PTS" -an "$1".smooth.mp4
 }
+vdo-cmprs() {
+  # compress video to be less than 10mb
+  ffmpeg -i "$1" -vcodec libx264 -b:v 800k -vf "scale=1280:720" -fs 10M "$1"-cmprs.mp4
+}
 
 # Colours
 foreground_color='\033[0;1;36m'
