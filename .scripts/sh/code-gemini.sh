@@ -3,7 +3,6 @@
 tput civis
 
 prompt="Extract the problem defined in this image as text and respond only with that extracted text only."
-api_key="AIzaSyBiPBK4uNFzS6VuCusS0V9MB6ooQzzstIU" # Ensure GEMINI_API_KEY is set in your environment
 
 if [ -z "$api_key" ]; then
   echo "Error: GEMINI_API_KEY environment variable not set."
