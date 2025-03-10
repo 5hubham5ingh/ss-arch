@@ -30,7 +30,7 @@ function generateTheme(colorCodes, isDark = true) {
   const colors = colorCodes.map((c) => Color(c));
 
   // Select distinct colors for various UI elements
-  const foreground = isDark ? Color("white") : Color("#666666");
+  const foreground = isDark ? Color("black") : Color("white");
   const [
     popup,
     background,
@@ -41,7 +41,7 @@ function generateTheme(colorCodes, isDark = true) {
     complimentry1,
     complimentry2,
   ] = selectDistinctColors(colors, 8).map((color) => {
-    while (Color.isReadable(color, foreground)) {
+    while (!Color.isReadable(color, foreground)) {
       isDark ? color.saturate(1).brighten(1) : color.desaturate(1).darken(1);
     }
     return color;
@@ -74,7 +74,7 @@ function generateThemeConfig(theme) {
       frame_inactive: theme.background.toHexString(),
       tab_text: theme.foreground.toHexString(),
       tab_loading: theme.accentSecondary.toHexString(),
-      tab_background_text: theme.foreground.clone().lighten().toHexString(),
+      tab_background_text: theme.foreground.clone().darken().toHexString(),
       tab_selected: theme.accentPrimary.toHexString(),
       tab_line: theme.accentPrimary.toHexString(),
       toolbar: theme.accentPrimary.toHexString(),

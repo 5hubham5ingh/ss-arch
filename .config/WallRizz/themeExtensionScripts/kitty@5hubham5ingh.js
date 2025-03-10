@@ -49,7 +49,16 @@ function generateTheme(colorCodes, isDark = true) {
       : Color("white");
   };
 
-  const background = pickColor();
+  const background = isDark ? pickColor().darken(100) : pickColor();
+
+  // Ensure background is light or dark
+  // const brightness = background.getLuminance();
+  // const threshold = 0.4;
+  // if (brightness > threshold && isDark) {
+  //   background.darken(brightness - threshold);
+  // } else if (brightness < threshold && !isDark) {
+  //   background.brighten(threshold - brightness);
+  // }
 
   // Ensure visibility of colors against the background color.
   for (const color of colors) {
