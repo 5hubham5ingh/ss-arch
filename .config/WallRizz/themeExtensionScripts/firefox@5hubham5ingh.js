@@ -6,12 +6,12 @@
 */
 
 export function getDarkThemeConf(colors) {
-  const theme = generateTheme(colors, false);
+  const theme = generateTheme(colors);
   return generateThemeConfig(theme);
 }
 
 export function getLightThemeConf(colors) {
-  const theme = generateTheme(colors);
+  const theme = generateTheme(colors, false);
   return generateThemeConfig(theme);
 }
 
@@ -27,10 +27,15 @@ export function setTheme(themeConfigPath) {
 }
 
 function generateTheme(colorCodes, isDark = true) {
-  const colors = colorCodes.map((c) => Color(c));
+  const colors = colorCodes.map((c) => Color(c)).filter((c) =>
+    !(c.getLuminance() <= 0.02 || c.getLuminance() >= 0.98)
+  );
 
-  // Select distinct colors for various UI elements
-  const foreground = isDark ? Color("black") : Color("white");
+  const foreground = isDark ? colors.pop() : colors.shift();
+  if (isDark) {
+    while (foreground.isDark()) foreground.lighten();
+  } else while (foreground.isLight()) foreground.darken();
+
   const [
     popup,
     background,
@@ -39,10 +44,9 @@ function generateTheme(colorCodes, isDark = true) {
     accentPrimary,
     accentSecondary,
     complimentry1,
-    complimentry2,
   ] = selectDistinctColors(colors, 8).map((color) => {
     while (!Color.isReadable(color, foreground)) {
-      isDark ? color.saturate(1).brighten(1) : color.desaturate(1).darken(1);
+      isDark ? color.desaturate(1).darken(1) : color.saturate(1).brighten(1);
     }
     return color;
   });
@@ -56,8 +60,7 @@ function generateTheme(colorCodes, isDark = true) {
     accentPrimary,
     accentSecondary,
     complimentry1,
-    complimentry2,
-    variant: !isDark ? "dark" : "light",
+    variant: isDark ? "dark" : "light",
   };
 }
 
@@ -68,16 +71,16 @@ function generateThemeConfig(theme) {
       accentcolor: theme.accentPrimary.toHexString(),
       textcolor: theme.foreground.toHexString(),
 
-      icons: theme.foreground.toHexString(),
+      icons: theme.background.toHexString(),
       icons_attention: theme.accentPrimary.toHexString(),
       frame: theme.backgroundExtra.toHexString(),
       frame_inactive: theme.background.toHexString(),
-      tab_text: theme.foreground.toHexString(),
+      tab_text: theme.accentSecondary.toHexString(),
       tab_loading: theme.accentSecondary.toHexString(),
       tab_background_text: theme.foreground.clone().darken().toHexString(),
-      tab_selected: theme.accentPrimary.toHexString(),
+      tab_selected: theme.foreground.toHexString(),
       tab_line: theme.accentPrimary.toHexString(),
-      toolbar: theme.accentPrimary.toHexString(),
+      toolbar: theme.foreground.toHexString(),
       toolbar_text: theme.foreground.toHexString(),
       toolbar_field: theme.backgroundExtra.toHexString(),
       toolbar_field_focus: theme.backgroundLight.toHexString(),
@@ -90,15 +93,15 @@ function generateThemeConfig(theme) {
       toolbar_field_highlight_text: theme.background.toHexString(),
       toolbar_top_separator: theme.accentPrimary.toHexString(),
       toolbar_vertical_separator: theme.backgroundLight.toHexString(),
-      toolbar_bottom_separator: theme.background.toHexString(),
+      toolbar_bottom_separator: theme.backgroundLight.toHexString(),
       ntp_card_background: enableBlur
         ? theme.backgroundExtra.clone().setAlpha(0.5)
           .toHex8String()
         : theme.backgroundExtra.toHexString(),
       ntp_background: enableBlur
-        ? theme.background.clone().setAlpha(0.4).toHex8String()
+        ? theme.background.clone().setAlpha(0.5).toHex8String()
         : theme.background.toHexString(),
-      ntp_text: theme.foreground.clone().lighten(100).toHexString(),
+      ntp_text: theme.foreground.toHexString(),
       popup: theme.popup.toHexString(),
       popup_border: theme.popup.toHexString(),
       popup_text: theme.foreground.toHexString(),

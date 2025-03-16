@@ -2,9 +2,11 @@
 
 updateWallpaperDirEnvVarInBashrc() {
   local new_export_line="export WALLPAPER_DIR=\"$1\""
-  grep -q "^export WALLPAPER_DIR=" ~/.bashrc &&
-    sed -i "s@^export WALLPAPER_DIR=.*@$new_export_line@" ~/.bashrc ||
+  if grep -q "^export WALLPAPER_DIR=" ~/.bashrc; then
+    sed -i "s@^export WALLPAPER_DIR=.*@$new_export_line@" ~/.bashrc
+  else
     echo "$new_export_line" >>~/.bashrc
+  fi
 }
 
 setWallpaperConfig() {
@@ -16,12 +18,13 @@ setWallpaperConfig() {
   )
 
   local wallDir="${wallDirs[$profile]}"
-  [ -z "$wallDir" ] && return # Exit if invalid profile
+  if [ -z "$wallDir" ]; then
+    return # Exit if invalid profile
+  fi
 
   local config_file=~/.config/hypr/hyprland.conf
   local new_source="source=~/.config/hypr/$profile.conf"
 
-  # If a "source=~/.config/hypr/..." line exists, replace it; otherwise, append it
   if grep -q "^source=~/.config/hypr/.*\.conf" "$config_file"; then
     sed -i "s@^source=~/.config/hypr/.*\.conf@$new_source@" "$config_file"
   else
@@ -29,20 +32,36 @@ setWallpaperConfig() {
   fi
 
   local blur_flag=""
-  [ "$profile" != "matte" ] && blur_flag="-f \"STD.setenv('enableBlur',true)\""
+  if [ "$profile" != "matte" ]; then
+    blur_flag="-f \"STD.setenv('enableBlur',true)\""
+    opacity_arg="0.75"
+  else
+    opacity_arg='1'
+  fi
 
   kitty -1 -o allow_remote_control=yes --class=hidden --title=hidden \
-    sh -c "WallRizz -n -r -d \"$wallDir\" $blur_flag && kitten @ set-background-opacity -a ${blur_flag:+0.75} ${blur_flag:+'1'}"
+    sh -c "WallRizz -n -r -d \"$wallDir\" $blur_flag && kitten @ set-background-opacity -a ${opacity_arg}"
 
   updateWallpaperDirEnvVarInBashrc "$wallDir"
 }
 
 updateThemeMode() {
   local new_export_line="\$themeMode=$1"
-  grep -q "^\$themeMode=" ~/.config/hypr/hyprland.conf &&
-    sed -i "s@^\$themeMode=.*@$new_export_line@" ~/.config/hypr/hyprland.conf ||
+  if grep -q "^\$themeMode=" ~/.config/hypr/hyprland.conf; then
+    sed -i "s@^\$themeMode=.*@$new_export_line@" ~/.config/hypr/hyprland.conf
+  else
     echo "$new_export_line" >>~/.config/hypr/hyprland.conf
+  fi
 }
 
 setWallpaperConfig "$1"
-[ -n "$2" ] && updateThemeMode "$([[ "$2" == "dark" ]] && echo "--no-light-theme" || echo "-l")"
+
+if [ -n "$2" ]; then
+  local theme_arg
+  if [ "$2" == "dark" ]; then
+    theme_arg="--no-light-theme"
+  else
+    theme_arg="-l"
+  fi
+  updateThemeMode "$theme_arg"
+fi
