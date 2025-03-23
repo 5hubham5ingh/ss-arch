@@ -1,0 +1,231 @@
+export function getDarkThemeConf(colors) {
+  const theme = generateTheme(colors);
+  return generateThemeConfig(theme);
+}
+
+export function getLightThemeConf(colors) {
+  const theme = generateTheme(colors, true);
+  return generateThemeConfig(theme, true);
+}
+
+export function setTheme(themeConfigPath) {
+  const themeConfigPathCacheFile = STD.open(
+    HOME_DIR.concat("/.cache/baremetal/themeFilePath.txt"),
+    "w+",
+  );
+
+  themeConfigPathCacheFile.puts(themeConfigPath);
+  themeConfigPathCacheFile.flush();
+  themeConfigPathCacheFile.close();
+}
+
+function generateTheme(hexcodes, isLight) {
+  // Create color objects for analysis
+  const colors = hexcodes.map((hex) => Color(hex));
+
+  // Sort colors by brightness
+  const sortedByBrightness = [...colors].sort((a, b) =>
+    a.getBrightness() - b.getBrightness()
+  );
+
+  // Group colors by hue ranges by converting to HSL
+  const findColorsInHueRange = (start, end) => {
+    return colors.filter((color) => {
+      const hsl = color.toHsl();
+      const hue = hsl.h;
+      return (hue >= start && hue <= end) ||
+        (start > end && (hue >= start || hue <= end));
+    });
+  };
+
+  // Find colors in different hue ranges
+  const blues = findColorsInHueRange(180, 270);
+  const reds = findColorsInHueRange(330, 30);
+  const greens = findColorsInHueRange(90, 150);
+
+  // Get most saturated color from a group
+  const getMostSaturated = (colorGroup) => {
+    if (colorGroup.length === 0) return null;
+    return colorGroup.sort((a, b) => {
+      const hslA = a.toHsl();
+      const hslB = b.toHsl();
+      return hslB.s - hslA.s;
+    })[0];
+  };
+
+  // Get the most saturated color overall
+  const mostSaturatedColor = getMostSaturated(colors);
+
+  // Strategy-specific color selection
+  let baseColors = {};
+
+  if (isLight) {
+    // Light theme strategy
+    const brightestColor = sortedByBrightness[sortedByBrightness.length - 1];
+    const darkestColor = sortedByBrightness[0];
+    const midBrightColor =
+      sortedByBrightness[Math.floor(sortedByBrightness.length / 2)];
+
+    // Primary color preferences: blues > most saturated
+    const primaryColor = getMostSaturated(blues) || mostSaturatedColor;
+
+    baseColors = {
+      // Background should be one of the brightest colors
+      background: brightestColor.toHexString(),
+
+      // Text should be one of the darkest colors
+      text: darkestColor.toHexString(),
+
+      // Primary color
+      primary: primaryColor.toHexString(),
+
+      // Surface - slightly darker than background
+      surface: brightestColor.clone().darken(5).toHexString(),
+
+      // Border color - medium brightness
+      border: midBrightColor.toHexString(),
+
+      // Highlight - lighter version of primary
+      highlight: primaryColor.clone().lighten(30).desaturate(20).toHexString(),
+
+      // Error - prefer reds
+      error: getMostSaturated(reds)?.toHexString() ||
+        mostSaturatedColor.clone().spin(0 - mostSaturatedColor.toHsl().h)
+          .toHexString(),
+
+      // Success - prefer greens
+      success: getMostSaturated(greens)?.toHexString() ||
+        mostSaturatedColor.clone().spin(120 - mostSaturatedColor.toHsl().h)
+          .toHexString(),
+    };
+  } else {
+    // Dark theme strategy
+    const darkestColor = sortedByBrightness[0];
+    const brightestColor = sortedByBrightness[sortedByBrightness.length - 1];
+    const slightlyBrighterColor = sortedByBrightness[2] ||
+      darkestColor.clone().brighten(5);
+
+    // Primary color preferences: blues > most saturated
+    const primaryColor = getMostSaturated(blues) || mostSaturatedColor;
+
+    baseColors = {
+      // Background should be one of the darkest colors
+      background: darkestColor.toHexString(),
+
+      // Text should be one of the brightest colors
+      text: brightestColor.toHexString(),
+
+      // Primary color - bright and saturated
+      primary: primaryColor.clone().brighten(10).saturate(20).toHexString(),
+
+      // Surface - slightly brighter than background
+      surface: slightlyBrighterColor.toHexString(),
+
+      // Border color - slightly brighter than surfaces
+      border: darkestColor.clone().brighten(10).toHexString(),
+
+      // Highlight - brighter version of primary
+      highlight: primaryColor.clone().brighten(15).saturate(10).toHexString(),
+
+      // Error - bright reds
+      error: (getMostSaturated(reds) ||
+        mostSaturatedColor.clone().spin(0 - mostSaturatedColor.toHsl().h))
+        .clone().brighten(20).saturate(20).toHexString(),
+
+      // Success - bright greens
+      success: (getMostSaturated(greens) ||
+        mostSaturatedColor.clone().spin(120 - mostSaturatedColor.toHsl().h))
+        .clone().brighten(20).saturate(20).toHexString(),
+    };
+  }
+
+  return baseColors;
+}
+
+const enableBlur = STD.getenv("enableBlur");
+function generateThemeConfig(baseColors, isLight) {
+  const theme = {};
+
+  // Brand/accent colors
+  theme.accentcolor = baseColors.primary;
+
+  // Text colors
+  theme.textcolor = baseColors.text;
+  theme.tab_text = baseColors.text;
+  theme.toolbar_text = baseColors.text;
+  theme.toolbar_field_text = baseColors.text;
+  theme.toolbar_field_text_focus = baseColors.text;
+  theme.popup_text = baseColors.text;
+  theme.sidebar_text = baseColors.text;
+  theme.bookmark_text = baseColors.text;
+  theme.ntp_text = baseColors.text;
+
+  // Tab related colors
+  theme.tab_selected = new Color(baseColors.primary).setAlpha(0.1).toString();
+  theme.tab_line = baseColors.primary;
+  theme.tab_loading = baseColors.primary;
+  theme.tab_background_text = new Color(baseColors.text).lighten(0.5)
+    .toString();
+  theme.tab_background_separator = new Color(baseColors.border).darken(0.1)
+    .toString();
+
+  // Frame colors
+  theme.frame = baseColors.background;
+  theme.frame_inactive = new Color(baseColors.background).darken(0.03)
+    .toString();
+
+  // Toolbar colors
+  theme.toolbar = new Color(baseColors.surface).lighten(0.02).toString();
+  theme.toolbar_field = baseColors.background;
+  theme.toolbar_field_focus = baseColors.background;
+  theme.toolbar_field_border = new Color(baseColors.border).setAlpha(0.5)
+    .toString();
+  theme.toolbar_field_border_focus = baseColors.primary;
+  theme.toolbar_field_separator = new Color(baseColors.border).setAlpha(0.8)
+    .toString();
+  theme.toolbar_field_highlight = new Color(baseColors.primary).setAlpha(0.2)
+    .toString();
+  theme.toolbar_field_highlight_text = baseColors.text;
+  theme.toolbar_top_separator = baseColors.border;
+  theme.toolbar_bottom_separator = baseColors.border;
+  theme.toolbar_vertical_separator = baseColors.border;
+
+  // Icon colors
+  theme.icons = new Color(baseColors.text).lighten(0.2).toString();
+  theme.icons_attention = baseColors.error;
+
+  // Popup colors
+  theme.popup = baseColors.background;
+  theme.popup_border = baseColors.border;
+  theme.popup_highlight = new Color(baseColors.primary).setAlpha(0.15)
+    .toString();
+  theme.popup_highlight_text = baseColors.text;
+
+  // Sidebar colors
+  theme.sidebar = new Color(baseColors.surface).darken(0.02).toString();
+  theme.sidebar_border = baseColors.border;
+  theme.sidebar_highlight = new Color(baseColors.primary).setAlpha(0.15)
+    .toString();
+  theme.sidebar_highlight_text = baseColors.text;
+
+  // NTP colors
+  theme.ntp_background = Color(baseColors.background).lighten().setAlpha(
+    0.5,
+  ).toHex8String();
+
+  theme.ntp_card_background = baseColors.background;
+  // Button states
+  theme.button_background_hover = new Color(baseColors.primary).setAlpha(0.08)
+    .toString();
+  theme.button_background_active = new Color(baseColors.primary).setAlpha(0.15)
+    .toString();
+
+  return JSON.stringify({
+    colors: theme,
+    images: null,
+    properties: {
+      color_scheme: isLight ? "light" : "dark",
+      content_color_scheme: isLight ? "light" : "dark",
+    },
+  });
+}

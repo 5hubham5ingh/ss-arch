@@ -18,22 +18,24 @@ export function getLightThemeConf(colors) {
 }
 
 export async function setTheme(themeConfPath, wallpaperPath) {
-  return execAsync(["kitty", "@", "set-colors", "-a", "-c", themeConfPath]);
+  await execAsync(["kitty", "@", "set-colors", "-a", "-c", themeConfPath]);
 
-  // const kittyWallpapersDirPath = HOME_DIR.concat("/pics/walls/1810x970.kitty/");
-  // const wallpaperNameIndex = wallpaperPath.lastIndexOf("/") + 1;
-  //
-  // const wallpaperName = wallpaperPath.slice(wallpaperNameIndex).split(".")[0];
-  //
-  // await execAsync([
-  //   "kitty",
-  //   "@",
-  //   "set-background-image",
-  //   // "-a",
-  //   `${kittyWallpapersDirPath}${wallpaperName}.png`,
-  // ]);
+  const kittyWallpapersDirPath = HOME_DIR.concat("/pics/walls/1810x970.kitty/");
+  const wallpaperNameIndex = wallpaperPath.lastIndexOf("/") + 1;
+
+  const wallpaperName = wallpaperPath.slice(wallpaperNameIndex).split(".")[0];
+
+  await execAsync([
+    "kitty",
+    "@",
+    "set-background-image",
+    "--match",
+    "title:^special",
+    `${kittyWallpapersDirPath}${wallpaperName}.png`,
+  ]).catch((_) => {});
 }
 
+const enableBlur = STD.getenv("enableBlur");
 function generateTheme(colorCodes, isDark = true) {
   const colors = colorCodes.map((c) => Color(c));
   const pickColor = (dark) => {
@@ -49,7 +51,9 @@ function generateTheme(colorCodes, isDark = true) {
       : Color("white");
   };
 
-  const background = isDark ? pickColor().darken(100) : pickColor();
+  const background = isDark
+    ? enableBlur ? pickColor().darken(100) : pickColor()
+    : pickColor();
 
   // Ensure background is light or dark
   // const brightness = background.getLuminance();
